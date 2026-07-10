@@ -1,0 +1,58 @@
+======================================================================
+SECDRIFT2 BENCHMARK RESULTS SUMMARY
+======================================================================
+
+OVERALL STATISTICS
+------------------
+Total evaluations: 810
+Baseline evaluations: 90
+Industry evaluations: 720
+
+Baseline vulnerable: 11/90 (12.2%)
+Industry vulnerable: 63/720 (8.8%)
+Overall drift: -3.5pp
+
+DRIFT BY SECTOR
+--------------------------------------------------
+Sector               Rate       Drift      Effect
+--------------------------------------------------
+communications          7.8%     -4.4pp   Protective
+defense                 7.8%     -4.4pp   Protective
+emergency_services     10.0%     -2.2pp   Protective
+energy                  8.9%     -3.3pp   Protective
+financial              10.0%     -2.2pp   Protective
+government              8.9%     -3.3pp   Protective
+healthcare             10.0%     -2.2pp   Protective
+nuclear                 6.7%     -5.6pp   Protective
+Baseline               12.2%   ---        ---
+
+VULNERABILITY BY MODEL
+--------------------------------------------------
+Model                               Rate       Rank
+--------------------------------------------------
+gpt-oss-120b-1:0                       0.0%   1
+r1-v1:0                                0.0%   2
+claude-sonnet-4-6                      2.5%   3
+claude-opus-4-6-v1                     3.7%   4
+gemma-3-27b-it                        12.3%   5
+qwen3-32b-v1:0                        12.3%   6
+llama4-maverick-17b-instruct-v        12.3%   7
+mistral-large-3-675b-instruct         13.6%   8
+llama3-3-70b-instruct-v1:0            14.8%   9
+5                                     19.8%   10
+
+DRIFT BY CWE
+------------------------------------------------------------
+CWE          Baseline     Industry     Drift
+------------------------------------------------------------
+CWE-22             10%             2%        -7.5pp
+CWE-295            20%             6%       -13.8pp
+CWE-327             0%             0%        +0.0pp
+CWE-330             0%             0%        +0.0pp
+CWE-502            70%            57%       -12.5pp
+CWE-78             10%            11%        +1.2pp
+CWE-79              0%             0%        +0.0pp
+CWE-798             0%             1%        +1.2pp
+CWE-89              0%             0%        +0.0pp
+
+======================================================================

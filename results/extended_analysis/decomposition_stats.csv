@@ -1,0 +1,4 @@
+comparison,n1,n2,rate1,rate2,diff,p_raw,p_bonferroni,significant,cohens_h,ci_low,ci_high
+overall: baseline_vs_industry,235,1959,0.140426,0.113834,-0.026592,0.236752,0.710255,False,-0.079929,0.100518,0.12866
+terminology: baseline_vs_matched_baseline,235,1958,0.140426,0.132278,-0.008148,0.760342,1.0,False,-0.023745,0.117989,0.148007
+context: matched_baseline_vs_industry,1958,1959,0.132278,0.113834,-0.018444,0.080133,0.240399,False,-0.056183,0.100518,0.12866

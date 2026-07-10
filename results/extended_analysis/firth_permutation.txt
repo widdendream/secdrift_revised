@@ -1,0 +1,21 @@
+================================================================================
+SEPARATION-ROBUST CHECKS ON THE CONDITION EFFECT (baseline vs industry)
+================================================================================
+code-only n = 4152;  permutations = 50000;  seed = 42
+
+1) FIRTH bias-reduced logistic: is_vulnerable ~ industry + C(cwe)
+   rows (baseline+industry)   : 2194  (CWE ref = CWE-502)
+   industry log-odds          : -0.792 (SE 0.367)
+   industry OR [95% Wald CI]  : 0.453 [0.221, 0.930]
+   penalized LR test industry : chi2(1)=6.062, p=0.0138
+   ordinary ML contrast       : ML industry beta=-0.786 se=0.383 (unstable if huge)
+
+2) PERMUTATION TEST -- marginal (pooled baseline vs industry)
+   observed drift             : -2.66 pp (n_base=235, n_ind=1959)
+   two-sided permutation p    : 0.2381
+
+3) PERMUTATION TEST -- CWE-stratified (CMH numerator; within-stratum)
+   strata                     : 9 (3 event-bearing)
+   observed statistic         : -5.102
+   two-sided permutation p    : 0.0445
+================================================================================

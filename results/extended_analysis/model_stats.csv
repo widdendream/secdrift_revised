@@ -1,0 +1,7 @@
+comparison,n1,n2,rate1,rate2,diff,p_raw,p_bonferroni,significant,cohens_h,ci_low,ci_high
+deepseek-r1: overall_rate,327,,0.018349,,,,,,,0.008436,0.039447
+gemma-3-27b: overall_rate,765,,0.160784,,,,,,,0.136459,0.188499
+llama-3-3-70b: overall_rate,765,,0.150327,,,,,,,0.126751,0.177397
+llama-4-maverick: overall_rate,765,,0.11634,,,,,,,0.095512,0.141002
+mistral-large-3: overall_rate,765,,0.117647,,,,,,,0.096703,0.142412
+qwen3-32b: overall_rate,765,,0.120261,,,,,,,0.099089,0.145229

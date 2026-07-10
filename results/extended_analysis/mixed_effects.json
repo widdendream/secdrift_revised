@@ -1,0 +1,134 @@
+{
+  "n_observations": 4152,
+  "method": "BinomialBayesMixedGLM (variational Bayes)",
+  "fixed": [
+    {
+      "term": "Intercept",
+      "coef": -3.625,
+      "se": 0.0961,
+      "ci_low": -3.8134,
+      "ci_high": -3.4367,
+      "odds_ratio": 0.0266,
+      "or_ci_low": 0.0221,
+      "or_ci_high": 0.0322,
+      "excludes_zero": true
+    },
+    {
+      "term": "condition[matched_baseline]",
+      "coef": -0.2438,
+      "se": 0.133,
+      "ci_low": -0.5044,
+      "ci_high": 0.0168,
+      "odds_ratio": 0.7836,
+      "or_ci_low": 0.6039,
+      "or_ci_high": 1.0169,
+      "excludes_zero": false
+    },
+    {
+      "term": "condition[industry]",
+      "coef": -0.9618,
+      "se": 0.1503,
+      "ci_low": -1.2564,
+      "ci_high": -0.6671,
+      "odds_ratio": 0.3822,
+      "or_ci_low": 0.2847,
+      "or_ci_high": 0.5132,
+      "excludes_zero": true
+    },
+    {
+      "term": "sector[defense]",
+      "coef": 0.0329,
+      "se": 0.2737,
+      "ci_low": -0.5036,
+      "ci_high": 0.5694,
+      "odds_ratio": 1.0335,
+      "or_ci_low": 0.6043,
+      "or_ci_high": 1.7673,
+      "excludes_zero": false
+    },
+    {
+      "term": "sector[emergency_services]",
+      "coef": -0.2821,
+      "se": 0.2925,
+      "ci_low": -0.8554,
+      "ci_high": 0.2913,
+      "odds_ratio": 0.7542,
+      "or_ci_low": 0.4251,
+      "or_ci_high": 1.3381,
+      "excludes_zero": false
+    },
+    {
+      "term": "sector[energy]",
+      "coef": 0.0767,
+      "se": 0.2738,
+      "ci_low": -0.4599,
+      "ci_high": 0.6132,
+      "odds_ratio": 1.0797,
+      "or_ci_low": 0.6313,
+      "or_ci_high": 1.8463,
+      "excludes_zero": false
+    },
+    {
+      "term": "sector[financial]",
+      "coef": -0.4923,
+      "se": 0.3034,
+      "ci_low": -1.0868,
+      "ci_high": 0.1023,
+      "odds_ratio": 0.6112,
+      "or_ci_low": 0.3373,
+      "or_ci_high": 1.1077,
+      "excludes_zero": false
+    },
+    {
+      "term": "sector[government]",
+      "coef": 0.1365,
+      "se": 0.2731,
+      "ci_low": -0.3987,
+      "ci_high": 0.6717,
+      "odds_ratio": 1.1462,
+      "or_ci_low": 0.6712,
+      "or_ci_high": 1.9575,
+      "excludes_zero": false
+    },
+    {
+      "term": "sector[healthcare]",
+      "coef": -0.2238,
+      "se": 0.2923,
+      "ci_low": -0.7968,
+      "ci_high": 0.3492,
+      "odds_ratio": 0.7995,
+      "or_ci_low": 0.4508,
+      "or_ci_high": 1.4179,
+      "excludes_zero": false
+    },
+    {
+      "term": "sector[nuclear]",
+      "coef": 0.4489,
+      "se": 0.2553,
+      "ci_low": -0.0515,
+      "ci_high": 0.9494,
+      "odds_ratio": 1.5667,
+      "or_ci_low": 0.9498,
+      "or_ci_high": 2.5841,
+      "excludes_zero": false
+    }
+  ],
+  "random": [
+    {
+      "group": "scenario_id",
+      "sd": 5.5142,
+      "variance": 30.4065
+    },
+    {
+      "group": "cwe",
+      "sd": 0.1961,
+      "variance": 0.0385
+    },
+    {
+      "group": "model",
+      "sd": 1.2239,
+      "variance": 1.4979
+    }
+  ],
+  "fell_back": false
+}

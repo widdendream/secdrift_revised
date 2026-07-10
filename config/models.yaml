@@ -1,0 +1,175 @@
+# SecDrift Model Configuration
+# ==============================
+# Provider-agnostic configuration for LLM benchmarking.
+#
+# USAGE:
+#   python -m secdrift.runner --group paper
+#   python -m secdrift.runner --model qwen3-32b
+#
+# ADDING NEW MODELS:
+#   1. Add model entry under 'models' section
+#   2. Configure provider if new (under 'providers')
+#   3. Add to appropriate group
+
+# =============================================================================
+# Generation Defaults
+# =============================================================================
+defaults:
+  temperature: 0.7
+  max_tokens: 2048
+  top_p: 0.95
+  timeout_seconds: 120
+  max_retries: 3
+
+# =============================================================================
+# Execution Settings
+# =============================================================================
+execution:
+  parallel_workers: 40      # Increased for faster execution
+  rate_limit_rpm: 100       # Increased rate limit
+  progress_interval: 300    # Progress update interval (seconds)
+
+# =============================================================================
+# Provider Configurations
+# =============================================================================
+# Supported provider types:
+#   - bedrock: AWS Bedrock (requires AWS credentials)
+#   - openai: OpenAI API
+#   - anthropic: Anthropic API
+#   - openai_compatible: Any OpenAI-compatible API
+
+providers:
+  bedrock:
+    type: bedrock
+    region: "${AWS_REGION:-us-east-1}"
+    # Credentials: Use AWS CLI, environment variables, or IAM roles
+
+  openai:
+    type: openai
+    api_key: "${OPENAI_API_KEY}"
+
+  anthropic:
+    type: anthropic
+    api_key: "${ANTHROPIC_API_KEY}"
+
+  deepseek:
+    type: openai_compatible
+    api_key: "${DEEPSEEK_API_KEY}"
+    base_url: "https://api.deepseek.com"
+
+  together:
+    type: openai_compatible
+    api_key: "${TOGETHER_API_KEY}"
+    base_url: "https://api.together.xyz/v1"
+
+# =============================================================================
+# Model Definitions
+# =============================================================================
+models:
+  # --- Claude Models (Anthropic) ---
+  claude-sonnet-4-6:
+    provider: bedrock
+    model_id: "us.anthropic.claude-sonnet-4-6"
+    display_name: "Claude Sonnet 4.6"
+    vendor: Anthropic
+    enabled: true
+
+  claude-opus-4-6:
+    provider: bedrock
+    model_id: "us.anthropic.claude-opus-4-6-v1"
+    display_name: "Claude Opus 4.6"
+    vendor: Anthropic
+    enabled: true
+
+  claude-haiku-4-5:
+    provider: bedrock
+    model_id: "anthropic.claude-haiku-4-5-20251001-v1:0"
+    display_name: "Claude Haiku 4.5"
+    vendor: Anthropic
+    enabled: true
+
+  # --- Llama Models (Meta) ---
+  llama-4-maverick:
+    provider: bedrock
+    model_id: "us.meta.llama4-maverick-17b-instruct-v1:0"
+    display_name: "Llama 4 Maverick 17B"
+    vendor: Meta
+    enabled: true
+
+  llama-3-3-70b:
+    provider: bedrock
+    model_id: "us.meta.llama3-3-70b-instruct-v1:0"
+    display_name: "Llama 3.3 70B"
+    vendor: Meta
+    enabled: true
+
+  # --- DeepSeek ---
+  deepseek-r1:
+    provider: bedrock
+    model_id: "us.deepseek.r1-v1:0"
+    display_name: "DeepSeek R1"
+    vendor: DeepSeek
+    enabled: true
+
+  # --- Qwen (Alibaba) ---
+  qwen3-32b:
+    provider: bedrock
+    model_id: "qwen.qwen3-32b-v1:0"
+    display_name: "Qwen3 32B"
+    vendor: Qwen
+    enabled: true
+
+  # --- OpenAI Open Source ---
+  gpt-oss-120b:
+    provider: bedrock
+    model_id: "openai.gpt-oss-120b-1:0"
+    display_name: "GPT-OSS 120B"
+    vendor: OpenAI
+    enabled: true
+
+  # --- Moonshot ---
+  kimi-k2-5:
+    provider: bedrock
+    model_id: "moonshotai.kimi-k2.5"
+    display_name: "Kimi K2.5"
+    vendor: Moonshot
+    enabled: true
+
+  # --- Google ---
+  gemma-3-27b:
+    provider: bedrock
+    model_id: "google.gemma-3-27b-it"
+    display_name: "Gemma 3 27B"
+    vendor: Google
+    enabled: true
+
+  # --- Mistral ---
+  mistral-large-3:
+    provider: bedrock
+    model_id: "mistral.mistral-large-3-675b-instruct"
+    display_name: "Mistral Large 3"
+    vendor: Mistral
+    enabled: true
+
+# =============================================================================
+# Model Groups
+# =============================================================================
+groups:
+  # The seven models used in the paper. Six produce analyzable code; GPT-OSS 120B
+  # is evaluated but excluded from vulnerability analysis (0% code-production rate).
+  # (Other models defined above are optional and were not part of the study.)
+  paper:
+    - qwen3-32b
+    - llama-4-maverick
+    - llama-3-3-70b
+    - gemma-3-27b
+    - mistral-large-3
+    - deepseek-r1
+    - gpt-oss-120b
+
+  quick:
+    - qwen3-32b
+    - llama-4-maverick
+
+active:
+  group: paper

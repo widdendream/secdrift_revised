@@ -1,0 +1,9 @@
+comparison,n1,n2,rate1,rate2,diff,p_raw,p_bonferroni,significant,cohens_h,ci_low,ci_high
+communications: industry_vs_baseline,235,250,0.140426,0.1,-0.040426,0.207526,1.0,False,-0.124718,0.068655,0.143452
+defense: industry_vs_baseline,235,242,0.140426,0.119835,-0.020591,0.586272,1.0,False,-0.061245,0.084746,0.166804
+emergency_services: industry_vs_baseline,235,244,0.140426,0.094262,-0.046163,0.120418,0.963344,False,-0.144096,0.063634,0.137468
+energy: industry_vs_baseline,235,242,0.140426,0.123967,-0.016459,0.685196,1.0,False,-0.048615,0.088232,0.171454
+financial: industry_vs_baseline,235,246,0.140426,0.109756,-0.030669,0.335731,1.0,False,-0.092869,0.076535,0.154978
+government: industry_vs_baseline,235,244,0.140426,0.114754,-0.025671,0.414059,1.0,False,-0.077036,0.080598,0.160853
+healthcare: industry_vs_baseline,235,246,0.140426,0.113821,-0.026604,0.412588,1.0,False,-0.079968,0.079933,0.159585
+nuclear: industry_vs_baseline,235,245,0.140426,0.134694,-0.005732,0.894973,1.0,False,-0.016641,0.097542,0.183124
