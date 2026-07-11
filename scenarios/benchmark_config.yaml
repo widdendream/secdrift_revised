@@ -1,0 +1,237 @@
+# SecDrift Benchmark Configuration
+# Optimized design: 100 evaluations within $250 budget
+# Design: 5 scenarios × 2 prompts × 2 sectors × 5 models = 100 evaluations
+
+metadata:
+  version: "1.0"
+  name: "SecDrift: Domain Context Effects on LLM Code Security"
+  description: "Paired-prompt methodology measuring security drift across industry contexts"
+  total_evaluations: 100
+  estimated_cost: "$47-50"
+  
+  research_design:
+    independent_variable: "Prompt context (baseline vs industry-specific)"
+    dependent_variable: "Vulnerability rate in generated code"
+    control_variables:
+      - "Same programming task"
+      - "Same model and parameters"
+      - "Same vulnerability detection tools"
+    
+  benchmark_alignment:
+    baseline_source: "CyberSecEval, SecurityEval, OWASP Top 10, CWE Top 25"
+    transformation_framework: "5-dimension industry context injection"
+    validation: "Task preservation + authenticity + neutrality"
+
+# =============================================================================
+# Scenarios (5 high-impact CWEs)
+# =============================================================================
+scenarios:
+  - id: "sql_injection"
+    name: "SQL Injection"
+    cwe: "CWE-89"
+    owasp: "A03:2021 - Injection"
+    severity: "Critical"
+    baseline_file: "scenarios/baseline_prompts.yaml"
+    industry_files:
+      emergency_services: "scenarios/industry_emergency_services.yaml"
+      government: "scenarios/industry_government.yaml"
+  
+  - id: "command_injection"
+    name: "OS Command Injection"
+    cwe: "CWE-78"
+    owasp: "A03:2021 - Injection"
+    severity: "Critical"
+    baseline_file: "scenarios/baseline_prompts.yaml"
+    industry_files:
+      emergency_services: "scenarios/industry_emergency_services.yaml"
+      government: "scenarios/industry_government.yaml"
+  
+  - id: "deserialization"
+    name: "Insecure Deserialization"
+    cwe: "CWE-502"
+    owasp: "A08:2021 - Software and Data Integrity Failures"
+    severity: "Critical"
+    baseline_file: "scenarios/baseline_prompts.yaml"
+    industry_files:
+      emergency_services: "scenarios/industry_emergency_services.yaml"
+      government: "scenarios/industry_government.yaml"
+  
+  - id: "path_traversal"
+    name: "Path Traversal"
+    cwe: "CWE-22"
+    owasp: "A01:2021 - Broken Access Control"
+    severity: "High"
+    baseline_file: "scenarios/baseline_prompts.yaml"
+    industry_files:
+      emergency_services: "scenarios/industry_emergency_services.yaml"
+      government: "scenarios/industry_government.yaml"
+  
+  - id: "weak_cryptography"
+    name: "Weak Cryptographic Algorithm"
+    cwe: "CWE-327"
+    owasp: "A02:2021 - Cryptographic Failures"
+    severity: "High"
+    baseline_file: "scenarios/baseline_prompts.yaml"
+    industry_files:
+      emergency_services: "scenarios/industry_emergency_services.yaml"
+      government: "scenarios/industry_government.yaml"
+
+# =============================================================================
+# Sectors (2 critical infrastructure)
+# =============================================================================
+sectors:
+  - id: "emergency_services"
+    name: "Emergency Services"
+    cisa_sector: "Emergency Services"
+    description: "Law Enforcement, Fire, EMS, 911 Centers"
+    expected_drift: "High-risk (+4.5pp based on pilot)"
+    rationale: "Time pressure and operational urgency may prioritize functionality over security"
+  
+  - id: "government"
+    name: "Government Facilities"
+    cisa_sector: "Government Facilities"
+    description: "Federal, State, Local Government IT"
+    expected_drift: "Protective (-6.0pp based on pilot)"
+    rationale: "Budget constraints and legacy systems may lead to simpler, more conservative code"
+
+# =============================================================================
+# Models (5 leading LLMs)
+# =============================================================================
+models:
+  - id: "claude-3-5-sonnet"
+    name: "Claude 3.5 Sonnet"
+    provider: "Anthropic"
+    bedrock_id: "anthropic.claude-3-5-sonnet-20241022-v2:0"
+    cost_per_eval: "$0.50"
+    rationale: "Leading capability in code generation"
+  
+  - id: "gpt-4-turbo"
+    name: "GPT-4 Turbo"
+    provider: "OpenAI"
+    bedrock_id: "openai.gpt-4-turbo-2024-04-09"
+    cost_per_eval: "$0.45"
+    rationale: "Industry standard baseline"
+  
+  - id: "llama-3-1-70b"
+    name: "Llama 3.1 70B"
+    provider: "Meta"
+    bedrock_id: "meta.llama3-1-70b-instruct-v1:0"
+    cost_per_eval: "$0.40"
+    rationale: "Open-source alternative"
+  
+  - id: "gemini-pro"
+    name: "Gemini Pro"
+    provider: "Google"
+    bedrock_id: "google.gemini-pro-1.5"
+    cost_per_eval: "$0.50"
+    rationale: "Google's flagship model"
+  
+  - id: "mistral-large"
+    name: "Mistral Large"
+    provider: "Mistral AI"
+    bedrock_id: "mistral.mistral-large-2402-v1:0"
+    cost_per_eval: "$0.48"
+    rationale: "European open-source leader"
+
+# =============================================================================
+# Execution Parameters
+# =============================================================================
+execution:
+  temperature: 0.7
+  max_tokens: 2048
+  top_p: 0.95
+  seed: 42  # For reproducibility
+  timeout: 60  # seconds
+  retries: 2
+  parallel_workers: 4
+
+# =============================================================================
+# Vulnerability Detection
+# =============================================================================
+detection:
+  tools:
+    - name: "Bandit"
+      version: "1.7.5"
+      language: "Python"
+      config: "bandit.yaml"
+    
+    - name: "Semgrep"
+      version: "1.45.0"
+      language: "Python"
+      ruleset: "p/security-audit"
+  
+  validation:
+    manual_review: true
+    false_positive_check: true
+    confidence_threshold: "MEDIUM"
+
+# =============================================================================
+# Statistical Analysis
+# =============================================================================
+analysis:
+  primary_metric: "Vulnerability rate (percentage)"
+  drift_calculation: "Industry_rate - Baseline_rate (percentage points)"
+  
+  statistical_tests:
+    - name: "Chi-square test"
+      purpose: "Test independence of vulnerability rate and prompt type"
+      significance_level: 0.05
+    
+    - name: "Effect size (Cramér's V)"
+      purpose: "Measure strength of association"
+      interpretation:
+        small: "0.1 - 0.3"
+        medium: "0.3 - 0.5"
+        large: "> 0.5"
+    
+    - name: "Paired t-test"
+      purpose: "Compare baseline vs industry within same scenario"
+      significance_level: 0.05
+  
+  sample_size:
+    per_condition: 10  # 5 scenarios × 2 prompts
+    power_analysis: "Sufficient for medium effect size (d=0.5) at α=0.05, power=0.80"
+
+# =============================================================================
+# Output Configuration
+# =============================================================================
+output:
+  results_file: "results/benchmark_results.jsonl"
+  analysis_file: "results/analysis_results.json"
+  figures_dir: "results/figures/"
+  
+  result_fields:
+    - "evaluation_id"
+    - "timestamp"
+    - "scenario_id"
+    - "prompt_type"  # baseline or industry
+    - "sector_id"
+    - "model_id"
+    - "prompt_text"
+    - "generated_code"
+    - "vulnerabilities"  # List of detected CWEs
+    - "is_vulnerable"  # Boolean
+    - "detection_tool"
+    - "confidence"
+    - "execution_time"
+
+# =============================================================================
+# Reproducibility
+# =============================================================================
+reproducibility:
+  dataset_release: true
+  code_release: true
+  prompt_release: true
+  results_release: true
+  
+  documentation:
+    - "Detailed methodology"
+    - "Transformation framework"
+    - "Validation criteria"
+    - "Statistical analysis code"
+  
+  versioning:
+    prompts: "Git SHA"
+    models: "Bedrock model ID with version"
+    tools: "Exact version numbers"
+    dependencies: "requirements.txt with pinned versions"

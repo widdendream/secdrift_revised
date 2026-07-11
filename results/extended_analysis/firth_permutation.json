@@ -1,0 +1,35 @@
+{
+  "n": 4152,
+  "n_perm": 50000,
+  "seed": 42,
+  "firth": {
+    "n_rows": 2194,
+    "cwe_ref": "CWE-502",
+    "industry_logodds": -0.7917336001245177,
+    "industry_se": 0.3666836982453892,
+    "industry_OR": 0.45305869148044475,
+    "industry_OR_ci": [
+      0.22081711752265337,
+      0.9295573650666608
+    ],
+    "industry_ci_logodds": [
+      -1.5104204425720882,
+      -0.07304675767694713
+    ],
+    "plrt_stat": 6.062445346916434,
+    "plrt_p": 0.013808635010711714,
+    "ml_note": "ML industry beta=-0.786 se=0.383 (unstable if huge)"
+  },
+  "perm_marginal": {
+    "obs_drift_pp": -2.659194334929893,
+    "p_two_sided": 0.2380552388952221,
+    "n_ind": 1959,
+    "n_base": 235
+  },
+  "perm_stratified": {
+    "obs_statistic": -5.101751207729461,
+    "p_two_sided": 0.04445911081778364,
+    "n_strata": 9,
+    "event_bearing_strata": 3
+  }
+}

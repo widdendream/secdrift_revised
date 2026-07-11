@@ -1,0 +1,11 @@
+group,key,n,parses_rate,defines_fn_rate,well_formed_rate,vuln_rate
+condition,baseline,235,98.3,97.87,97.87,14.04
+condition,matched_baseline,1958,98.37,98.26,98.26,13.23
+condition,industry,1959,97.96,97.09,97.09,11.38
+overall,ALL,4152,98.17,97.69,97.69,12.4
+model,deepseek-r1,327,78.29,77.98,77.98,1.83
+model,gemma-3-27b,765,99.48,99.22,99.22,16.08
+model,llama-3-3-70b,765,100.0,100.0,100.0,15.03
+model,llama-4-maverick,765,100.0,99.61,99.61,11.63
+model,mistral-large-3,765,99.87,99.87,99.87,11.76
+model,qwen3-32b,765,100.0,98.17,98.17,12.03
